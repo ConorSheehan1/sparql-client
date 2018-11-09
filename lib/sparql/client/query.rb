@@ -368,8 +368,8 @@ module SPARQL; class Client
     ##
     # @example PREFIX dc: <http://purl.org/dc/elements/1.1/> PREFIX foaf: <http://xmlns.com/foaf/0.1/> SELECT * WHERE \{ ?s ?p ?o . \}
     #   query.select.
-    #     prefix(dc: RDF::URI("http://purl.org/dc/elements/1.1/")).
-    #     prefix(foaf: RDF::URI("http://xmlns.com/foaf/0.1/")).
+    #     prefix("dc: <http://purl.org/dc/elements/1.1/>").
+    #     prefix("foaf:<http://xmlns.com/foaf/0.1/>").
     #     where([:s, :p, :o])
     #
     # @return [Query]
@@ -380,6 +380,13 @@ module SPARQL; class Client
       self
     end
 
+    # @example PREFIX dc: <http://purl.org/dc/elements/1.1/> PREFIX foaf: <http://xmlns.com/foaf/0.1/> SELECT * WHERE \{ ?s ?p ?o . \}
+    #   query.select.
+    #     prefixes([
+    #       "dc: <http://purl.org/dc/elements/1.1/>",
+    #       "foaf:<http://xmlns.com/foaf/0.1/>"
+    #     ]).
+    #     where([:s, :p, :o])
     # @param  [Array] arr
     # @return [Query]
     def prefixes(arr)
