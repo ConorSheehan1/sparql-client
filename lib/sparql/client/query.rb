@@ -380,7 +380,7 @@ module SPARQL; class Client
       self
     end
 
-    # @param Array arr
+    # @param  [Array] arr
     # @return [Query]
     def prefixes(arr)
       raise ArgumentError unless arr.kind_of? Array

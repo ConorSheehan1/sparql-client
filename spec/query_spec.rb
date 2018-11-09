@@ -192,6 +192,13 @@ describe SPARQL::Client::Query do
       expect(subject.select.prefixes(prefixes).where([:s, :p, :o]).to_s).to eq "PREFIX #{prefixes[0]} PREFIX #{prefixes[1]} SELECT * WHERE { ?s ?p ?o . }"
     end
 
+    it "shoud support prefix use" do
+      prefix = "dc: <http://purl.org/dc/elements/1.1/>"
+      expect(subject.select.prefix(prefix).where([:s, 'dc:title', :o]).to_s).to eq "PREFIX #{prefix} SELECT * WHERE { ?s dc:title ?o . }"
+    end
+
+    # ensure prefix ends with / ?
+
     it "should support OPTIONAL" do
       expect(subject.select.where([:s, :p, :o]).optional([:s, RDF.type, :o], [:s, RDF::URI("http://purl.org/dc/terms/abstract"), :o]).to_s).to eq "SELECT * WHERE { ?s ?p ?o . OPTIONAL { ?s a ?o . ?s <http://purl.org/dc/terms/abstract> ?o . } }"
     end
