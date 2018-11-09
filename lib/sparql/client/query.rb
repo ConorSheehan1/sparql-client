@@ -375,7 +375,21 @@ module SPARQL; class Client
     # @return [Query]
     # @see    http://www.w3.org/TR/sparql11-query/#prefNames
     def prefix(string)
+      raise ArgumentError unless string.kind_of? String
       (options[:prefixes] ||= []) << string
+      self
+    end
+
+    # @param Array arr
+    # @return [Query]
+    def prefixes(arr)
+      raise ArgumentError unless arr.kind_of? Array
+      # options[:prefixes] ||= []
+      # # is uniqueness necessary? could also use set
+      # options[:prefixes] = (options[:prefixes] + arr).uniq
+      arr.each do |v|
+        self.prefix(v)
+      end
       self
     end
 
