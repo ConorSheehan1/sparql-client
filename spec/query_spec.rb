@@ -202,25 +202,6 @@ describe SPARQL::Client::Query do
       expect { subject.select.prefixes(prefix) }.to raise_error ArgumentError, "Prefixes must be an Array of Strings"
     end
 
-    # it "should support PREFIX use" do
-    #   prefix = "dc: <http://purl.org/dc/elements/1.1/>"
-    #   expect(subject.select.prefix(prefix).where([:s, 'dc:title', :o]).to_s).to eq "PREFIX #{prefix} SELECT * WHERE { ?s dc:title ?o . }"
-    # end
-  
-    # it "should support PREFIX queries" do
-    #   repository = RDF::Repository.load("spec/fixtures/dbpedia.ttl")
-    #   client = SPARQL::Client.new(repository)
-    #   # require 'byebug'
-    #   # byebug
-    #   # client = SPARQL::Client.new("https://dbpedia.org/sparql/")
-    #   query = client.select(:place_name).
-    #           prefix('dbpedia: <http://dbpedia.org/ontology/>').
-    #           where([:link, 'dbpedia:place', :place_name]).
-    #           limit(10)
-
-    #   expect(query.solutions.length).to eq 10
-    # end
-
     it "should support OPTIONAL" do
       expect(subject.select.where([:s, :p, :o]).optional([:s, RDF.type, :o], [:s, RDF::URI("http://purl.org/dc/terms/abstract"), :o]).to_s).to eq "SELECT * WHERE { ?s ?p ?o . OPTIONAL { ?s a ?o . ?s <http://purl.org/dc/terms/abstract> ?o . } }"
     end
