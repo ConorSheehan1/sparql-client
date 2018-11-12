@@ -119,10 +119,10 @@ sparql.delete_data(data)
 
 ## Documentation
 
-* {SPARQL::Client}
-  * {SPARQL::Client::Query}
-  * {SPARQL::Client::Repository}
-  * {SPARQL::Client::Update}
+* [SPARQL::Client](https://www.rubydoc.info/github/ruby-rdf/sparql-client/SPARQL/Client)
+  * [SPARQL::Client::Query](https://www.rubydoc.info/github/ruby-rdf/sparql-client/SPARQL/Client/Query)
+  * [SPARQL::Client::Repository](https://www.rubydoc.info/github/ruby-rdf/sparql-client/SPARQL/Client/Repository)
+  * [SPARQL::Client::Update](https://www.rubydoc.info/github/ruby-rdf/sparql-client/SPARQL/Client/Update)
 
 ## Dependencies
 

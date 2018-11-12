@@ -369,13 +369,13 @@ module SPARQL; class Client
     # @example PREFIX dc: <http://purl.org/dc/elements/1.1/> PREFIX foaf: <http://xmlns.com/foaf/0.1/> SELECT * WHERE \{ ?s ?p ?o . \}
     #   query.select.
     #     prefix("dc: <http://purl.org/dc/elements/1.1/>").
-    #     prefix("foaf:<http://xmlns.com/foaf/0.1/>").
+    #     prefix("foaf: <http://xmlns.com/foaf/0.1/>").
     #     where([:s, :p, :o])
     #
     # @return [Query]
     # @see    http://www.w3.org/TR/sparql11-query/#prefNames
     def prefix(string)
-      raise ArgumentError unless string.kind_of? String
+      raise ArgumentError.new("Prefix must be a String") unless string.kind_of? String
       (options[:prefixes] ||= []) << string
       self
     end
@@ -384,16 +384,13 @@ module SPARQL; class Client
     #   query.select.
     #     prefixes([
     #       "dc: <http://purl.org/dc/elements/1.1/>",
-    #       "foaf:<http://xmlns.com/foaf/0.1/>"
+    #       "foaf: <http://xmlns.com/foaf/0.1/>"
     #     ]).
     #     where([:s, :p, :o])
     # @param  [Array] arr
     # @return [Query]
     def prefixes(arr)
-      raise ArgumentError unless arr.kind_of? Array
-      # options[:prefixes] ||= []
-      # # is uniqueness necessary? could also use set
-      # options[:prefixes] = (options[:prefixes] + arr).uniq
+      raise ArgumentError.new("Prefixes must be an Array of Strings") unless arr.kind_of? Array
       arr.each do |v|
         self.prefix(v)
       end
